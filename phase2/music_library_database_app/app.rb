@@ -10,7 +10,15 @@ DatabaseConnection.connect
 class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
-    also_reload 'lib/album_repository'
-    also_reload 'lib/artist_repository'
+  end
+
+  get "/albums" do
+    repo = AlbumRepository.new
+    albums = repo.all
+
+    response = albums.map do |album|
+      album.title
+    end.join(", ")
+    return response
   end
 end
