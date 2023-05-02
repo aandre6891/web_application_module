@@ -51,10 +51,10 @@ Hello Andy!
 # 2
 # Request:
 
-GET /hello?name=Andy
+GET /hello?name=John
 
 # Expected response:
-Hello Andy!
+Hello John!
 ```
 
 ```
