@@ -30,4 +30,14 @@ describe Application do
       expect(response.body).to eq "Julia, Mary, Karim"
     end
   end
+
+  context "when it receive these names: 'Joe,Alice,Zoe,Julia,Kieran'" do
+    it "should return 'Alice,Joe,Julia,Kieran,Zoe'" do
+      names = 'Joe,Alice,Zoe,Julia,Kieran'
+      response = post("/sort-names?names=#{names}")
+
+      expect(response.status).to eq 200
+      expect(response.body).to eq("Alice,Joe,Julia,Kieran,Zoe")
+    end
+  end
 end
