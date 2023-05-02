@@ -15,7 +15,7 @@ You'll need to include:
   Path: /hello
   Query Parameters:
     name (string)
-    
+
 
 ## 2. Design the Response
 
@@ -27,30 +27,12 @@ Your response might return plain text, JSON, or HTML code.
 
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
-```html
-<!-- EXAMPLE -->
-<!-- Response when the post is found: 200 OK -->
-
-<html>
-  <head></head>
-  <body>
-    <h1>Post title</h1>
-    <div>Post content</div>
-  </body>
-</html>
-```
+When query param 'name' is 'Andy'
 
 ```html
-<!-- EXAMPLE -->
-<!-- Response when the post is not found: 404 Not Found -->
 
-<html>
-  <head></head>
-  <body>
-    <h1>Sorry!</h1>
-    <div>We couldn't find this post. Have a look at the homepage?</div>
-  </body>
-</html>
+Hello Andy!
+
 ```
 
 ## 3. Write Examples
@@ -58,23 +40,25 @@ _Replace the below with your own design. Think of all the different possible res
 _Replace these with your own design._
 
 ```
+# 1
 # Request:
 
-GET /posts?id=1
+GET /hello?name=Andy
 
 # Expected response:
+Hello Andy!
 
-Response for 200 OK
+# 2
+# Request:
+
+GET /hello?name=Andy
+
+# Expected response:
+Hello Andy!
 ```
 
 ```
-# Request:
 
-GET /posts?id=276278
-
-# Expected response:
-
-Response for 404 Not Found
 ```
 
 ## 4. Encode as Tests Examples

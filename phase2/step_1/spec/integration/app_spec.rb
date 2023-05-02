@@ -7,5 +7,27 @@ describe Application do
 
   let(:app) { Application.new }
 
+  context "When param 'name' is 'Andy" do
+    it "should return 'Hello Andy!'" do
+      response = get("/hello?name=Andy")
+      expect(response.status).to eq(200)
+      expect(response.body).to eq("Hello Andy!")
+      end
+    end
 
+  context "When param 'name' is 'John" do
+    it "should return 'Hello John!'" do
+    response = get("/hello?name=John")
+    expect(response.status).to eq(200)
+    expect(response.body).to eq("Hello John!")
+    end
+  end
+
+  context "when param names is 'Julia, Mary, Karim'" do
+    it "should return 'Julia, Mary, Karim'" do
+      response = get "/names"
+      expect(response.status).to eq 200
+      expect(response.body).to eq "Julia, Mary, Karim"
+    end
+  end
 end
