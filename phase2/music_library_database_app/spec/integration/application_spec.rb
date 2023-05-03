@@ -10,8 +10,18 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
+  def reset_album_table
+  seed_sql = File.read('spec/seeds/music_library.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
+  connection.exec(seed_sql)
+end
+
+  before(:each) do 
+    reset_album_table
+  end
+
   context "GET /albums" do
-    xit "should return the list of albums" do
+    it "should return the list of albums" do
       response = get("/albums")
 
       expected_response = "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring"
@@ -20,7 +30,7 @@ describe Application do
       expect(response.body).to eq(expected_response)
     end
   end
-
+  
   context "POST /albums" do
     it "should add a new album" do 
       response = post(
@@ -31,10 +41,22 @@ describe Application do
       )
       expect(response.status).to eq(200)
       expect(response.body).to eq("")
-
+      
       response = get("/albums")
-
+      
       expect(response.body).to include("Voyage")
     end 
   end
+  
+  # context "GET /albums" do
+  #   it "should return the list of albums" do
+  #     response = get("/albums")
+
+  #     expected_response = "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring"
+      
+  #     expect(response.status).to eq 200
+  #     expect(response.body).to eq(expected_response)
+  #   end
+  # end
+  
 end
