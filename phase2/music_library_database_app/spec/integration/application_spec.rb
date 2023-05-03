@@ -21,11 +21,15 @@ describe Application do
   end
 
   context "GET /" do
-    it "should return the html index with given name and image" do
-      response = get("/", name: 'Andy')
+    it "returns an html list of names" do
+      response = get("/")
+
       expect(response.status).to eq 200
-      expect(response.body).to include("<h1>Hello Andy!</h1>")
-      # expect(response.body).to include('<img src="https://coursereport')
+      expect(response.body).to include("<p>Anna</p>")
+      expect(response.body).to include("<p>Kim</p>")
+      expect(response.body).to include("<p>Josh</p>")
+      expect(response.body).to include("<p>David</p>")
+      
     end
   end
 
