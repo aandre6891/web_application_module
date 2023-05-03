@@ -63,6 +63,7 @@ describe Application do
     it "should add 'Wild nothing' to the artists" do
       response = post("/artists", name: 'Wild nothing', genre: 'Indie')
       expect(response.status).to eq 200
+      
       response = get("/artists")
       expect(response.body).to include("Wild nothing")
       expect(response.body).to eq("Pixies, ABBA, Taylor Swift, Nina Simone, Wild nothing")
