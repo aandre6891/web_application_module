@@ -12,6 +12,10 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  get "/" do
+    return erb(:index)
+  end
+
   get "/albums" do
     repo = AlbumRepository.new
     albums = repo.all

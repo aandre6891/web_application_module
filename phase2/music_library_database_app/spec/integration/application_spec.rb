@@ -20,6 +20,15 @@ describe Application do
     reset_tables
   end
 
+  context "GET /" do
+    it "should return the html index" do
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include("<h1>Hello!</h1>")
+      expect(response.body).to include('<img src="hello.jpg"/>')
+    end
+  end
+
   context "GET /albums" do
     it "should return the list of albums" do
       response = get("/albums")
