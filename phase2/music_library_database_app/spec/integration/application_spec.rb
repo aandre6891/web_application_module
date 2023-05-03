@@ -10,14 +10,14 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
-  def reset_album_table
+  def reset_tables
   seed_sql = File.read('spec/seeds/music_library.sql')
   connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
   connection.exec(seed_sql)
-end
+  end
 
   before(:each) do 
-    reset_album_table
+    reset_tables
   end
 
   context "GET /albums" do
@@ -48,15 +48,15 @@ end
     end 
   end
   
-  # context "GET /albums" do
-  #   it "should return the list of albums" do
-  #     response = get("/albums")
+  context "GET /artists" do
+    it "should return the list of artists" do
+      response = get("/artists")
 
-  #     expected_response = "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring"
+      expected_response = "Pixies, ABBA, Taylor Swift, Nina Simone"
       
-  #     expect(response.status).to eq 200
-  #     expect(response.body).to eq(expected_response)
-  #   end
-  # end
+      expect(response.status).to eq 200
+      expect(response.body).to eq(expected_response)
+    end
+  end
   
 end

@@ -22,7 +22,6 @@ class ArtistRepository
 
       artists << artist
     end
-
     return artists
   end
 

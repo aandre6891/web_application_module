@@ -32,4 +32,14 @@ class Application < Sinatra::Base
 
     return ""
   end
+
+  get "/artists" do
+    repo = ArtistRepository.new
+    artists = repo.all
+
+    response = artists.map do |artist|
+      artist.name
+    end.join(", ")
+    return response
+  end
 end
