@@ -21,15 +21,18 @@ describe Application do
   end
 
   context "GET /" do
-    it "returns an html list of names" do
-      response = get("/")
+    it "returns an hello page if the password is correct" do
+      response = get("/", password: 'abcd')
 
       expect(response.status).to eq 200
-      expect(response.body).to include("<p>Anna</p>")
-      expect(response.body).to include("<p>Kim</p>")
-      expect(response.body).to include("<p>Josh</p>")
-      expect(response.body).to include("<p>David</p>")
-      
+      expect(response.body).to include("Hello!")
+    end
+    
+    it "returns a forbidden page if the password is incorrect" do
+      response = get("/", password: 'abcaksdlkajsdlkjoid')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include("Access Forbidden!")
     end
   end
 
