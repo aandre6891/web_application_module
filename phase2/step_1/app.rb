@@ -3,7 +3,7 @@ require 'sinatra/base'
 class Application < Sinatra::Base
   
   get '/hello' do
-    
+    return erb(:index)
   end
 
   get '/names' do
