@@ -37,10 +37,12 @@ describe Application do
   end
 
   context "GET /albums" do
-    it "should return the list of albums" do
+    it "should return the links to the albums" do
       response = get("/albums")
       
       expect(response.status).to eq 200
+      expect(response.body).to include('<p><a href="/albums/1">Doolittle</a></p>')
+      expect(response.body).to include('<p><a href="/albums/12">Ring Ring</a></p>')
     end
   end
 
