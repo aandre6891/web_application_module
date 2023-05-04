@@ -71,6 +71,15 @@ describe Application do
   end
   
   context "POST /albums" do
+    it "should validate album parameters" do
+      response = post("/albums", 
+        invalid_artist_title: 'OK Computer', 
+        another_invalid_parameter: 'invalid parameter'
+      )  
+
+      expect(response.status).to eq(400) 
+    end
+    
     it "should add a new album" do 
       response = post(
         '/albums', 
@@ -116,4 +125,16 @@ describe Application do
       expect(response.body).to include('<a href="/artists/5">Wild nothing</a>')
     end
   end 
+
+  context "GET /albums/new" do
+    it "should return the form to add a new album" do
+      response = get("/albums/new")
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('<form method="POST" action="/albums">')
+      expect(response.body).to include('<input type="text" name="album_title" />')
+      expect(response.body).to include('<input type="text" name="album_release_year" />')
+      expect(response.body).to include('<input type="text" name="album_artist_id" />')
+    end
+  end
 end
