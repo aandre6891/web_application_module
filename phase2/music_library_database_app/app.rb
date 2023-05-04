@@ -13,10 +13,18 @@ class Application < Sinatra::Base
   end
 
   get "/" do
-    @password = params[:password]
-
     return erb(:index)
   end
+
+  get '/about' do
+    return erb(:about)
+  end
+
+  # get "/" do
+  #   @password = params[:password]
+
+  #   return erb(:index)
+  # end
 
   get "/albums" do
     repo = AlbumRepository.new
