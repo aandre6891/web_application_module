@@ -98,6 +98,17 @@ describe Application do
     end
   end
 
+  context "GET /artists/:id" do
+    it "returns the info of the artist 'Pixies'" do
+      response = get("/artists/1")
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('<h2>ID: 1<br/>')
+      expect(response.body).to include('NAME: Pixies<br/>')
+      expect(response.body).to include('GENRE: Rock</h2>')
+    end
+  end
+
   context "POST /artists" do
     it "should add 'Wild nothing' to the artists" do
       response = post("/artists", name: 'Wild nothing', genre: 'Indie')
