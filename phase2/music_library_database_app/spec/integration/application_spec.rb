@@ -20,31 +20,31 @@ describe Application do
     reset_tables
   end
 
-  context "GET /" do
-    xit "returns an hello page if the password is correct" do
-      response = get("/", password: 'abcd')
+  # context "GET /" do
+  #   xit "returns an hello page if the password is correct" do
+  #     response = get("/", password: 'abcd')
 
-      expect(response.status).to eq 200
-      expect(response.body).to include("Hello!")
-    end
+  #     expect(response.status).to eq 200
+  #     expect(response.body).to include("Hello!")
+  #   end
     
-    xit "returns a forbidden page if the password is incorrect" do
-      response = get("/", password: 'abcaksdlkajsdlkjoid')
+  #   xit "returns a forbidden page if the password is incorrect" do
+  #     response = get("/", password: 'abcaksdlkajsdlkjoid')
 
-      expect(response.status).to eq 200
-      expect(response.body).to include("Access Forbidden!")
-    end
-  end
+  #     expect(response.status).to eq 200
+  #     expect(response.body).to include("Access Forbidden!")
+  #   end
+  # end
 
   context "GET /albums" do
     it "should return the links to the albums" do
       response = get("/albums")
       
       expect(response.status).to eq 200
-      expect(response.body).to include('<p><a href="/albums/1">Doolittle</a></p>')
-      expect(response.body).to include('<p><a href="/albums/2">Surfer Rosa</a></p>')
-      expect(response.body).to include('<p><a href="/albums/3">Waterloo</a></p>')
-      expect(response.body).to include('<p><a href="/albums/12">Ring Ring</a></p>')
+      expect(response.body).to include('<a href="/albums/1">Doolittle</a><br/>')
+      expect(response.body).to include('<a href="/albums/2">Surfer Rosa</a><br/>')
+      expect(response.body).to include('<a href="/albums/3">Waterloo</a><br/>')
+      expect(response.body).to include('<a href="/albums/12">Ring Ring</a><br/>')
     end
   end
 

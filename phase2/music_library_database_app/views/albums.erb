@@ -5,7 +5,7 @@
 
     <div>
       <% @albums.each do |album| %>
-        <p><a href="/albums/<%=album.id%>"><%=album.title%></a></p>
+        <a href="/albums/<%=album.id%>"><%=album.title%></a><br/>
       <% end %>
     </div>
   </body>
