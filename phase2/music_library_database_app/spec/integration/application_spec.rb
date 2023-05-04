@@ -113,7 +113,7 @@ describe Application do
       expect(response.status).to eq 200
       
       response = get("/artists")
-      expect(response.body).to include("Wild nothing")
+      expect(response.body).to include('<a href="/artists/5">Wild nothing</a>')
     end
   end 
 end
