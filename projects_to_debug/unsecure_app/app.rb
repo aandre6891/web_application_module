@@ -13,6 +13,10 @@ class Application < Sinatra::Base
   post '/hello' do
     @name = params[:name]
 
+    unless @name.match?(/\A[[:alpha:][:blank:]]+\z/)
+      status 400
+      return ""
+    end
     return erb(:hello)
   end
 end

@@ -28,4 +28,28 @@ describe Application do
       expect(response.body).to include('Hi Aurora!')
     end
   end
+
+  context "POST /hello when name contains <" do
+    it "returns 400 status" do
+      response = post('/hello', name: 'Andrea<')
+
+      expect(response.status).to eq(400)
+    end
+  end
+  
+  context "POST /hello when name contains !" do
+    it "returns 400 status" do
+      response = post('/hello', name: 'Andrea!')
+
+      expect(response.status).to eq(400)
+    end
+  end
+  
+  context "POST /hello when name contains a space" do
+    it "returns 200 status" do
+      response = post('/hello', name: 'Andrea Ruggieri')
+
+      expect(response.status).to eq(200)
+    end
+  end
 end
