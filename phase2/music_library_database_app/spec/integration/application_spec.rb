@@ -69,6 +69,17 @@ describe Application do
       expect(response.body).to include('Artist: Pixies')
     end
   end
+
+  context "GET /albums/new" do
+    it "should return the form to add a new album" do
+      response = get("/albums/new")
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('<form method="POST" action="/albums">')
+      expect(response.body).to include('<input type="text" name="title" />')
+      expect(response.body).to include('<input type="text" name="release_year" />')
+    end
+  end
   
   context "POST /albums" do
     it "should validate album parameters" do
@@ -79,6 +90,7 @@ describe Application do
 
       expect(response.status).to eq(400) 
     end
+    
     
     it "should add a new album" do 
       response = post(
@@ -116,6 +128,29 @@ describe Application do
     end
   end
 
+  context "GET /artists/new" do
+    it "returns the form to add a new artist" do
+      response = get("/artists/new")
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('<form method="POST" action="/artists">')
+      expect(response.body).to include('<input type="text" name="name"/>')
+      expect(response.body).to include('<input type="text" name="genre"/>')
+      
+    end
+  end
+
+  context "POST /artists" do
+    it "should validate artist parameters" do
+      response = post("/artists", 
+        invalid_name_parameter: 'invalid parameter', 
+        another_genre_parameter: 'invalid parameter'
+      )  
+
+      expect(response.status).to eq(400) 
+    end
+  end
+
   context "POST /artists" do
     it "should add 'Wild nothing' to the artists" do
       response = post("/artists", name: 'Wild nothing', genre: 'Indie')
@@ -125,15 +160,4 @@ describe Application do
       expect(response.body).to include('<a href="/artists/5">Wild nothing</a>')
     end
   end 
-
-  context "GET /albums/new" do
-    it "should return the form to add a new album" do
-      response = get("/albums/new")
-
-      expect(response.status).to eq 200
-      expect(response.body).to include('<form method="POST" action="/albums">')
-      expect(response.body).to include('<input type="text" name="title" />')
-      expect(response.body).to include('<input type="text" name="release_year" />')
-    end
-  end
 end
