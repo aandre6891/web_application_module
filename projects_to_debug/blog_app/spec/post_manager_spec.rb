@@ -1,5 +1,5 @@
-require 'post'
-require 'post_manager'
+require_relative '../lib/post'
+require_relative '../lib/post_manager'
 
 describe PostManager do
   it 'adds new post' do
